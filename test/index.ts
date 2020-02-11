@@ -38,4 +38,7 @@ test("Fails to connect to database", async() => {
   });
 });
 
+// TODO
+// - Write tests that actually connect to a sample database
+
 test.run();
