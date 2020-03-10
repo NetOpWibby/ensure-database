@@ -1,6 +1,7 @@
 # @webb/ensure-database
 
 > Ensure your desired RethinkDB database exists.
+> If not, it gets created.
 
 
 
