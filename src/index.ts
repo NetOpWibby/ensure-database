@@ -1,8 +1,9 @@
 
 
 
-//  I M P O R T
+//  I M P O R T S
 
+import print from "@webb/console";
 import { r } from "rethinkdb-ts";
 
 //  U T I L
@@ -51,8 +52,21 @@ export default async(database: DatabaseInput) => {
 
   if (!databaseList.includes(name)) {
     await r.dbCreate(name).run(databaseConnection);
-    console.log(`⚡️ Created database "${name}"`);
-  } else console.log(`✨ Database "${name}" exists`);
+
+    console.log(
+      print.magentaLine(print.black(" rethinkdb ")) +
+      print.invert(" created — ") +
+      print.invert(print.bold(name)) +
+      print.invert(" database ")
+    );
+  } else {
+    console.log(
+      print.magentaLine(print.black(" rethinkdb ")) +
+      print.invert(" ready — ") +
+      print.invert(print.bold(name)) +
+      print.invert(" database ")
+    );
+  }
 
   databaseConnection.close();
 };
