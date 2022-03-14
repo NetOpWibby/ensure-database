@@ -1,12 +1,12 @@
 
 
 
-//  I M P O R T S
+///  I M P O R T
 
 import print from "@webb/console";
 import { r } from "rethinkdb-ts";
 
-//  U T I L
+///  U T I L
 
 interface DatabaseInput {
   name: string;
@@ -28,9 +28,11 @@ interface DatabaseInput {
 
 
 
-//  E X P O R T
+///  E X P O R T
 
-export default async(database: DatabaseInput) => {
+export default ensureDatabase;
+
+export async function ensureDatabase(database: DatabaseInput) {
   let { name, options } = database;
 
   options = {
@@ -43,7 +45,7 @@ export default async(database: DatabaseInput) => {
     port: 28015,
     silent: true,
     user: "admin",
-    // User overrides
+    // supplied overrides
     ...options
   };
 
@@ -52,20 +54,9 @@ export default async(database: DatabaseInput) => {
 
   if (!databaseList.includes(name)) {
     await r.dbCreate(name).run(databaseConnection);
-
-    console.log(
-      print.magentaLine(print.black(" rethinkdb ")) +
-      print.invert(" created — ") +
-      print.invert(print.bold(name)) +
-      print.invert(" database ")
-    );
+    process.stdout.write("[rethinkdb] table created: " + print.bold(name) + "\n");
   } else {
-    console.log(
-      print.magentaLine(print.black(" rethinkdb ")) +
-      print.invert(" ready — ") +
-      print.invert(print.bold(name)) +
-      print.invert(" database ")
-    );
+    process.stdout.write("[rethinkdb] table ready: " + print.bold(name) + "\n");
   }
 
   databaseConnection.close();
