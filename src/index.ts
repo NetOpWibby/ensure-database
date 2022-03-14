@@ -54,9 +54,9 @@ export async function ensureDatabase(database: DatabaseInput) {
 
   if (!databaseList.includes(name)) {
     await r.dbCreate(name).run(databaseConnection);
-    process.stdout.write("[rethinkdb] table created: " + print.bold(name) + "\n");
+    process.stdout.write("[rethinkdb] database created: " + print.bold(name) + "\n");
   } else {
-    process.stdout.write("[rethinkdb] table ready: " + print.bold(name) + "\n");
+    process.stdout.write("[rethinkdb] database ready: " + print.bold(name) + "\n");
   }
 
   databaseConnection.close();

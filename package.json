@@ -50,5 +50,5 @@
     "test:lint-coverage": "nyc npm run test:lint-assert"
   },
   "types": "dist/index.d.ts",
-  "version": "2022.03.14"
+  "version": "2022.03.14.1"
 }
